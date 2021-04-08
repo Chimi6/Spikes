@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>canvas</title>
+  <link rel="stylesheet" type="text/css" href="csshake.css">
+  
+</head>
+<style>
+  
+div{
+  padding: 10px
+}
+  #container {
+
+    display: flex
+  }
+  h1{
+    color:red
+  }
+
+
+  label {
+    height: 10px
+  }
+  
+  .dark{
+    background: black
+  }
+
+  
+</style>
+
+<body  >
+    <h1 id="mode">Light</h1>
+    <button id ="toggle" onclick="toggleDark()">Change to Dark Mode</button>
+    <button id ="toggle2" onclick="toggleShake()">shake</button>
+  <div id="container">
+    <div onclick="toggleShake2(this)">
+      <svg id="svg_element" height="50" width="50">
+        <rect width="50" height="50" style="fill:rgba(255, 255, 255, 0)" />
+        <rect y=20 width="50" height="10" style="fill:rgb(255, 0, 0)" />
+        <rect x=20 width="10" height="50" style="fill:rgb(255, 0, 0)" />
+
+
+      </svg>
+    </div>
+    <div onclick="toggleShake2(this)">
+      <canvas id="myCanvas" width="50" height="50"></canvas>
+    </div>
+    <div id = "img" onclick="toggleShake2(this)"> 
+    </div>
+    
+    
+    <div id = 'gif' onclick="toggleShake2(this)">
+
+    </div>
+
+    <div id = 'jpg' onclick="toggleShake2(this)">
+
+    </div>
+
+
+  </div>
+  <h1>svg, canvas, img, gif, jpg</h1>
+
+
+
+
+  
+
+
+  <script>
+      let dark = false;
+      let shake = false;
+    var c = document.getElementById("myCanvas");
+
+    
+    var ctx = c.getContext("2d");
+    ctx.beginPath();
+    
+    ctx.fillStyle = "rgba(255, 255, 255, 0)";
+    ctx.fillRect(0, 0, 50, 50);
+    ctx.fillStyle = "#FF0000";
+    ctx.fillRect(0, 20, 50, 10);
+    ctx.fillRect(20, 0, 10, 50);
+    ctx.stroke();
+
+    var canvas = document.getElementById("myCanvas");
+    var img = new Image(); 
+    img.src = canvas.toDataURL("image/png"); 
+    document.getElementById("img").appendChild(img)
+    
+   
+    
+    var img3 = new Image(); 
+    img3.src = canvas.toDataURL("image/gif"); 
+    console.log(img3)
+
+    var img4 = new Image(); 
+    img4.src = canvas.toDataURL('image/jpeg', 1.0); 
+
+    document.getElementById("gif").appendChild(img3)
+    ctx.beginPath();
+    ctx.fillStyle = "rgb(255, 255, 255)";
+    ctx.fillRect(0, 0, 50, 50);
+    ctx.fillStyle = "#FF0000";
+    ctx.fillRect(0, 20, 50, 10);
+    ctx.fillRect(20, 0, 10, 50);
+    ctx.stroke();
+
+    var img2 = new Image(); 
+    img2.src = canvas.toDataURL('image/jpeg', 1.0); 
+    console.log(img2)
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    document.getElementById("jpg").appendChild(img2)
+    ctx.fillStyle = "rgba(255, 255, 255, 0)";
+    ctx.fillRect(0, 0, 50, 50);
+    ctx.fillStyle = "#FF0000";
+    ctx.fillRect(0, 20, 50, 10);
+    ctx.fillRect(20, 0, 10, 50);
+    ctx.stroke();
+
+    
+
+function toggleDark(){
+if(dark){
+    document.getElementById("mode").innerHTML = "Light";
+    document.getElementById("toggle").innerHTML = "Change to Dark Mode";
+    document.getElementById("jpg").innerHTML = "";
+    document.getElementById("jpg").appendChild(img2)
+  document.body.classList.remove("dark");
+  dark = !dark
+}else{
+    dark = !dark
+    document.getElementById("mode").innerHTML = "Dark";
+    document.getElementById("toggle").innerHTML = "Change to light Mode";
+    document.getElementById("jpg").innerHTML = "";
+    document.getElementById("jpg").appendChild(img4)
+    document.body.classList.add("dark");
+
+}
+}
+function toggleShake(){
+    if(shake){
+        shake=!shake
+        document.body.classList.remove("shake");
+    }else{
+        shake=!shake
+        document.body.classList.add("shake");
+    }
+}
+function toggleShake2(target){
+    if(shake){
+        shake=!shake
+        target.classList.remove("shake");
+    }else{
+        shake=!shake
+        target.classList.add("shake");
+    }
+}
+ 
+
+  </script>
+
+
+</body>
+
+</html>

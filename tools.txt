@@ -1,0 +1,4 @@
+I didn't use any external tools in spike 1.
+I drew and SVG and a Canvas manually then converted them through the toDataUrl function
+
+I didn't use JS or Css for the transparent trick. 
